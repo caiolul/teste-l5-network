@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+import numpy as np
 from app.services.ai_model import (
     model,
     predict_move,
@@ -26,8 +27,9 @@ def ai_move():
         numeric_board = convert_board_to_numeric(board)
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
-
+    print(numeric_board) # [[1, 0, 0], [0, 2, 0], [0, 0, 0]]
     next_move = predict_move(numeric_board)
+    print(next_move) # [0, 1]
     if next_move is None:
         return jsonify({"error": "Unable to determine a valid move."}), 400
 

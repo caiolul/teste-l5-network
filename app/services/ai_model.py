@@ -57,11 +57,31 @@ def train_model(dataset):
     model.fit(x, y)
     save_model()
 
+def is_valid_move(board, row, col):
+    return board[row][col] == 0
 
+def find_next_valid_move(board):
+    for row in range(3):
+        for col in range(3):
+            if is_valid_move(board, row, col):
+                return [row, col]
+    return None  # No valid moves left
 def predict_move(board):
     if not model:
         load_model()
-    return model.predict([board])[0]
+    board_array = np.array(board).reshape(1, -1)
+    predicted_index = model.predict(board_array)[0]
+    row = predicted_index // 3
+    col = predicted_index % 3
+    
+    if is_valid_move(board, row, col):
+        return [row, col]
+    else:
+        next_move = find_next_valid_move(board)
+        if next_move:
+            return next_move
+        else:
+            raise ValueError("Não há movimentos válidos restantes no tabuleiro")
 
 
 def save_model():
