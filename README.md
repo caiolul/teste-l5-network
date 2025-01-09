@@ -95,7 +95,7 @@ A aplicação estará disponível em [http://127.0.0.1:5000](http://127.0.0.1:50
 - **GET /api/ai/move?board=<BOARD>**
   - Retorna a próxima jogada sugerida pelo modelo para um estado atual do tabuleiro.
   - **Entrada**: `board` como string JSON, e.g., `[["X", "", ""], ["", "O", ""], ["", "", ""]]`.
-  - **Saída**: `{ "next_move": [0, 1] }`
+  - **Saída**: `{ "next_move": [0, 1], "board": [["X", "X", ""], ["", "O", ""], ["", "", ""]] }`
 
 ### 7. Salvar e Carregar Modelo
 - **POST /api/ai/save**
