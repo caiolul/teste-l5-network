@@ -55,7 +55,6 @@ def train_with_mock_data():
     global history_dataset
 
     existing_dataset = load_existing_dataset()
-    # print(existing_dataset)
     if existing_dataset:
         history_dataset["board_states"].extend(existing_dataset["board_states"])
         history_dataset["next_moves"].extend(existing_dataset["next_moves"])
